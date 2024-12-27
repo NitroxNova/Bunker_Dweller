@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cosg6uvgvasbe"]
+
+[ext_resource type="Script" path="res://ECS/manager.gd" id="1_mbtmd"]
+
+[node name="ECS" type="Node"]
+script = ExtResource("1_mbtmd")

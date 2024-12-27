@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c66gpy81shk42"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_nxcst"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c3chm"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_bk3cb"]
+sky_material = SubResource("ProceduralSkyMaterial_c3chm")
+
+[sub_resource type="Environment" id="Environment_hu5of"]
+background_mode = 2
+sky = SubResource("Sky_bk3cb")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_nxcst")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hu5of")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108829, 0.500753, 3.42423)
+
+[node name="Rooms" type="Node3D" parent="."]
+
+[node name="Entity" type="Node3D" parent="."]
