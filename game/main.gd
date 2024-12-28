@@ -47,8 +47,6 @@ func render_chunk(chunk_pos:Vector3i):
 					#stone_block.c_add(Position_Component.new(block_pos.x,block_pos.y,block_pos.z))
 					grid_map.set_cell_item(block_pos,0,randi_range(0,24))
 				block_idx += 1
-				
-				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
