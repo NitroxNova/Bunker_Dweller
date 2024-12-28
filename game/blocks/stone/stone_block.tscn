@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs2rsp51sgck"]
+
+[ext_resource type="Texture2D" uid="uid://b2eigcx76l8m7" path="res://game/blocks/stone/stone_texture.jpg" id="1_r8id0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nq1cf"]
+albedo_texture = ExtResource("1_r8id0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_w28a0"]
+material = SubResource("StandardMaterial3D_nq1cf")
+
+[node name="StoneBlock" type="StaticBody3D"]
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("BoxMesh_w28a0")

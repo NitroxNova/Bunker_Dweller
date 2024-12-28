@@ -8,7 +8,8 @@ static func run():
 		var entity :Entity = ECS.get_entity(entity_id)
 		var c_needs_render :Needs_Render_Component = entity.c_get("Needs_Render")
 		var c_position : Position_Component = entity.c_get("Position")
-		var node:Node3D = load(c_needs_render.path).instantiate()
+		var c_node: Node_Component = entity.c_get("Node")
+		var node:Node3D = c_node.node
 		node.set_meta("entity_id",entity_id)
 		node.position.x = c_position.x
 		node.position.y = c_position.y
