@@ -8,24 +8,30 @@ static func citizen()->Entity:
 	human_config.rig = HumanizerGlobalConfig.config.default_skeleton
 	human_config.add_equipment(HumanizerEquipment.new("RightEye-LowPolyEyeball"))
 	human_config.add_equipment(HumanizerEquipment.new("LeftEye-LowPolyEyeball"))
+	var c_name = NPC_Name_Component.new("",Name_Generator.random_last())
 	var gender = randi_range(0,1)
 	human_config.targets["gender"] = gender
 	if gender == 0:
 		human_config.add_equipment(HumanizerEquipment.new("DefaultBody","young_caucasian_female_special_suit"))
+		c_name.first = Name_Generator.random_female()
 	elif gender == 1:
 		human_config.add_equipment(HumanizerEquipment.new("DefaultBody","young_caucasian_male_special_suit"))
+		c_name.first = Name_Generator.random_male()
 	human_config.init_macros()	
 	var humanizer = Humanizer.new()
 	humanizer.load_config_async(human_config)
+	await humanizer.done_generating_materials
 	var human_scene = humanizer.get_CharacterBody3D(false)
 	human_scene.camera = ECS.get_node("/root/Main/Camera3D")
 	var animation_player:AnimationPlayer = human_scene.get_node("AnimationTree/AnimationPlayer")
 	animation_player.add_animation_library("custom",load("res://humanizer_assets/animations/Output/animations.res"))
-	print(animation_player.get_animation_list())
+	#print(animation_player.get_animation_list())
 	entity.c_add(Needs_Render_Component.new())
 	entity.c_add(Node_Component.new(human_scene))
 	entity.c_add(Citizen_Component.new())
+	entity.c_add(c_name)
 	entity.c_add(Task_Component.new())
+	entity.c_add(Sleep_Need_Component.new())
 	return entity
 	
 static func bed()->Entity:

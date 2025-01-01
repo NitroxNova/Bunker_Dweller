@@ -4,6 +4,7 @@ extends Node3D
 var grid := {}
 var rooms := []
 var cave_gen = Cave_Generator.new()
+var threads : Array[Thread] = []
 
 #func _physics_process(delta: float) -> void:
 	#if 
@@ -12,14 +13,22 @@ var cave_gen = Cave_Generator.new()
 func _ready() -> void:
 	build_cave()
 	
-	add_room(Vector3i(10,3,10),Vector3(-3,0,-3),[Vector2(0,3)])
-	#add_room(Vector3i(4,3,6),Vector3(-1,-2,0))
-	var thread = Thread.new()
-	thread.start(Entity_Spawner.citizen)
-	var citizen_entity = thread.wait_to_finish()
-	citizen_entity.c_add(Position_Component.new(0,1,0))
+	#add_room(Vector3i(10,3,10),Vector3(-3,0,-3),[Vector2(0,3)])
+	add_room(Vector3i(12,3,12),Vector3(-5,0,-5))
+	
+	var citizen_entity = await Entity_Spawner.citizen()
+	citizen_entity.c_add(Position_Component.new(0,0,0))
+	
+	var citizen_entity2 = await Entity_Spawner.citizen()
+	citizen_entity2.c_add(Position_Component.new(1,0,2))
+	
 	var bed_entity = Entity_Spawner.bed()
 	bed_entity.c_add(Position_Component.new(3,0,-1))
+	
+	citizen_entity.c_get("Citizen").bed = bed_entity.id
+	citizen_entity.c_get("Sleep_Need").value = 32
+	
+	citizen_entity2.c_get("Citizen").bed = bed_entity.id
 	#set_hallway(Vector3i.ZERO)
 	#set_hallway(Vector3i(1,0,1))
 	#set_ramp(Vector3i(0,-1,1),TYPE.ramp_west)

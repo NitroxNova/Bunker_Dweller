@@ -9,4 +9,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_pi1l3")
+
+[node name="TopBar" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Date_Time" type="Label" parent="TopBar"]
+layout_mode = 2
+
+[node name="Slower" type="Button" parent="TopBar"]
+layout_mode = 2
+text = "slower"
+
+[node name="Faster" type="Button" parent="TopBar"]
+layout_mode = 2
+text = "faster "
+
+[node name="Speed_Label" type="Label" parent="TopBar"]
+layout_mode = 2
+text = " 1x"
+
+[node name="Selected" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -54.0
+offset_right = 145.0
+grow_vertical = 0
+
+[node name="Panel" type="VBoxContainer" parent="Selected"]
+layout_mode = 2
+
+[node name="Display_Name" type="Label" parent="Selected/Panel"]
+layout_mode = 2
+text = "
+"
+
+[node name="Task" type="Label" parent="Selected/Panel"]
+layout_mode = 2
+
+[node name="Sleep_Need" type="HBoxContainer" parent="Selected/Panel"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Selected/Panel/Sleep_Need"]
+layout_mode = 2
+text = "sleep"
+
+[node name="ProgressBar" type="ProgressBar" parent="Selected/Panel/Sleep_Need"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+
+[connection signal="pressed" from="TopBar/Slower" to="." method="_on_slower_pressed"]
+[connection signal="pressed" from="TopBar/Faster" to="." method="_on_faster_pressed"]
