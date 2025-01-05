@@ -6,6 +6,8 @@ var rooms := []
 var cave_gen = Cave_Generator.new()
 var threads : Array[Thread] = []
 
+
+
 #func _physics_process(delta: float) -> void:
 	#if 
 
@@ -14,7 +16,10 @@ func _ready() -> void:
 	build_cave()
 	
 	#add_room(Vector3i(10,3,10),Vector3(-3,0,-3),[Vector2(0,3)])
-	add_room(Vector3i(12,3,12),Vector3(-5,0,-5))
+	var rb = Room_Builder.new()
+	rb.walls_gridmap = $Walls_GridMap
+	rb.floor_gridmap = $Floors_Gridmap
+	rb.add_room(Vector3i(10,3,10),Vector3(-5,0,-5))
 	
 	var citizen_entity = await Entity_Spawner.citizen()
 	citizen_entity.c_add(Position_Component.new(0,0,0))
@@ -22,7 +27,7 @@ func _ready() -> void:
 	var citizen_entity2 = await Entity_Spawner.citizen()
 	citizen_entity2.c_add(Position_Component.new(1,0,2))
 	
-	var bed_entity = Entity_Spawner.bed()
+	var bed_entity = Entity_Spawner.space_bed_king()
 	bed_entity.c_add(Position_Component.new(3,0,-1))
 	
 	citizen_entity.c_get("Citizen").bed = bed_entity.id
@@ -33,6 +38,30 @@ func _ready() -> void:
 	#set_hallway(Vector3i(1,0,1))
 	#set_ramp(Vector3i(0,-1,1),TYPE.ramp_west)
 
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+		#var point = get_point_under_cursor()
+		#print($GridMap.local_to_map(point))
+
+func get_point_under_cursor() :
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if not camera:
+		return 
+
+	var origin: Vector3 = camera.global_position     
+
+	#Get a point projected away from the camera, offset by the cursor, extended to 1000 units
+	var target: Vector3 = camera.project_ray_normal( get_viewport().get_mouse_position()) * 1000    
+
+	#Perform a raycast across the 3D space    
+	var ray_params := PhysicsRayQueryParameters3D.create(origin, target)    
+	var ray_result: Dictionary = get_world_3d().direct_space_state.intersect_ray(ray_params)    
+
+	#Try to get the position of the collision, if there was no collision, return Vector3.ZERO  
+	var hit_position: Vector3 = ray_result.get("position", Vector3.ZERO)   
+
+	return hit_position  
+
 func build_cave():
 	render_chunk(Vector3i(1,0,1))
 	render_chunk(Vector3i(1,0,2))
@@ -42,7 +71,7 @@ func build_cave():
 func render_chunk(chunk_pos:Vector3i):
 	var chunk_blocks = cave_gen.get_chunk(chunk_pos)
 	var block_idx = 0
-	var grid_map : GridMap = $GridMap
+	var grid_map : GridMap = $Blocks_Gridmap
 	for x in 16:
 		for y in 16:
 			for z in 16:
@@ -60,44 +89,6 @@ func render_chunk(chunk_pos:Vector3i):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-func add_room(dimensions:Vector3i,position:Vector3,doors=[]):
-	for x in dimensions.x:
-		for z in dimensions.z:
-			var coords = Vector3i()
-			coords.y = position.y
-			coords.x = position.x + x
-			coords.z = position.z + z
-			grid[coords] = {type="floor"}
-			var hall_scene = load("res://game/blocks/hallway/hallway.tscn").instantiate()
-			hall_scene.position = coords
-			$Rooms.add_child(hall_scene)
-			
-			if Vector2(x,z) in doors:
-				continue
-			
-			if z == 0:
-				var wall_scene = load("res://game/blocks/room/wall.tscn").instantiate()
-				wall_scene.position = coords
-				$Rooms.add_child(wall_scene)
-			elif z==dimensions.z-1:
-				var wall_scene = load("res://game/blocks/room/wall.tscn").instantiate()
-				wall_scene.position = coords
-				wall_scene.rotation.y = PI
-				$Rooms.add_child(wall_scene)
-			
-			if x == 0:
-				var wall_scene = load("res://game/blocks/room/wall.tscn").instantiate()
-				wall_scene.position = coords
-				wall_scene.rotation.y = PI/2
-				$Rooms.add_child(wall_scene)
-			elif x==dimensions.x-1:
-				var wall_scene = load("res://game/blocks/room/wall.tscn").instantiate()
-				wall_scene.position = coords
-				wall_scene.rotation.y = -PI/2
-				$Rooms.add_child(wall_scene)
-			
-				
 			
 			
 func toggle_hallway(coords:Vector3i):

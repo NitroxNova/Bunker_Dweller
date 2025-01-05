@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=4 uid="uid://bxyr75sspl418"]
+
+[ext_resource type="Material" uid="uid://673uh866olg5" path="res://assets/quaternius_modular_scifi/materials/MI_Trim_03.res" id="1_4vq1m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uf1r7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fvfly"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AwABAAAAAwACAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAA//8AAP//AAD//wAA//8AAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_768rj"]
+resource_name = "Platform_Simple_Blank_Plane_077"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("/9Gp9tWrqfbVq3/Q/9F/0A=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AwABAAAAAwACAAEA"),
+"material": SubResource("StandardMaterial3D_uf1r7"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAqioAAAAA//+qKv//AAD//6oq//8AAAAAqipU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fvfly")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2y3s0"]
+size = Vector3(1, 0.0644648, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r375y"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5slkh"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AgADAAAAAgABAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("//8AAAAAAAAAAAAA//8AAP//AAD//wAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cu703"]
+resource_name = "Platform_Simple_Line_Plane_077"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("qoVVqoBff9CAX1WqqoV/0A=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AgADAAAAAgABAAMA"),
+"material": SubResource("StandardMaterial3D_r375y"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("//8AAAAAqioAAAAA//+qKv//AAD//6oqAAAAAAAAqipU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_5slkh")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf548"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tsjvj"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AwAAAAUABAAAAAMAAAABAAIAAAAEAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAGfiAAD//wAA//8AAAAAAAD//wAAZ+IAAAAAAAD//wAAAAAAAAAAAAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rev76"]
+resource_name = "Platform_Simple_Tab_Plane_077"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("1at/0GunVaprp3/Qlc2/rpXNVaqVzX/Q"),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AwAAAAUABAAAAAMAAAABAAIAAAAEAAEA"),
+"material": SubResource("StandardMaterial3D_yf548"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAGfiqir//wAA//+qKgAAAAD//6oqZ+IAAAAAqir//wAAAACqKgAAAAAAAKoqVNWqKlTVqipU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tsjvj")
+
+[node name="Floors" type="Node3D"]
+
+[node name="Platform_Simple_Blank" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_768rj")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_4vq1m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platform_Simple_Blank"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform_Simple_Blank/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
+shape = SubResource("BoxShape3D_2y3s0")
+
+[node name="Platform_Simple_Line" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("ArrayMesh_cu703")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_4vq1m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platform_Simple_Line"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform_Simple_Line/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
+shape = SubResource("BoxShape3D_2y3s0")
+
+[node name="Platform_Simple_Tab" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = SubResource("ArrayMesh_rev76")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_4vq1m")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Platform_Simple_Tab"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform_Simple_Tab/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
+shape = SubResource("BoxShape3D_2y3s0")

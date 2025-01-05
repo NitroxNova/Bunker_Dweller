@@ -1,6 +1,7 @@
 extends Resource
 class_name Entity_Spawner
 
+const STONE_BLOCK = preload("res://game/blocks/stone/stone_block.tscn")
 
 static func citizen()->Entity:
 	var entity :Entity = ECS.new_entity()
@@ -40,10 +41,18 @@ static func bed()->Entity:
 	entity.c_add(Needs_Render_Component.new())
 	entity.c_add(Node_Component.new(bed_scene))
 	return entity
+
+static func space_bed_king()->Entity:
+	var entity: Entity = ECS.new_entity()
+	var bed_scene = load("res://game/objects/bed/space_bed_king.tscn").instantiate()
+	entity.c_add(Needs_Render_Component.new())
+	entity.c_add(Node_Component.new(bed_scene))
+	return entity
 	
+		
 static func stone_block()->Entity:
 	var entity: Entity = ECS.new_entity()
-	var block_scene = HumanizerResourceService.load_resource("res://game/blocks/stone/stone_block.tscn").instantiate()
+	var block_scene = STONE_BLOCK.instantiate()
 	entity.c_add(Needs_Render_Component.new())
 	entity.c_add(Node_Component.new(block_scene))
 	return entity

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://oopwxtxp7rfv"]
+
+[ext_resource type="MeshLibrary" uid="uid://c6pcaymqd7jm0" path="res://game/meshlibs/blocks.meshlib" id="1_oyuqk"]
+
+[sub_resource type="GDScript" id="GDScript_gjo64"]
+script/source = "extends Node3D
+
+var chunk_size = 50
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for x in chunk_size:
+		for y in chunk_size:
+			for z in chunk_size:
+				var pos = Vector3i(x,y,z)
+				$GridMap.set_cell_item(pos,0,1)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7k5ah"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fi4hw"]
+sky_material = SubResource("ProceduralSkyMaterial_7k5ah")
+
+[sub_resource type="Environment" id="Environment_pkwue"]
+background_mode = 2
+sky = SubResource("Sky_fi4hw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Test_Gridmap" type="Node3D"]
+script = SubResource("GDScript_gjo64")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pkwue")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_oyuqk")
+cell_size = Vector3(1, 1, 1)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0262118, 0, -0.999656, 0, 1, 0, 0.999656, 0, 0.0262118, -80.0067, 0, 31.7346)

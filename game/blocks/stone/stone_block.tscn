@@ -8,8 +8,6 @@ albedo_texture = ExtResource("1_r8id0")
 [sub_resource type="BoxMesh" id="BoxMesh_w28a0"]
 material = SubResource("StandardMaterial3D_nq1cf")
 
-[node name="StoneBlock" type="StaticBody3D"]
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+[node name="CSGMesh3D" type="CSGMesh3D"]
 use_collision = true
 mesh = SubResource("BoxMesh_w28a0")
