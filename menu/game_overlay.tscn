@@ -32,6 +32,18 @@ text = "faster "
 layout_mode = 2
 text = " 1x"
 
+[node name="Label" type="Label" parent="TopBar"]
+layout_mode = 2
+text = " -- Change Mode --"
+
+[node name="Room_Mode" type="Button" parent="TopBar"]
+layout_mode = 2
+text = "Room"
+
+[node name="Live_Mode" type="Button" parent="TopBar"]
+layout_mode = 2
+text = "Live"
+
 [node name="Selected" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 2

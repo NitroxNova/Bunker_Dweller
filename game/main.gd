@@ -15,11 +15,12 @@ var threads : Array[Thread] = []
 func _ready() -> void:
 	build_cave()
 	
-	#add_room(Vector3i(10,3,10),Vector3(-3,0,-3),[Vector2(0,3)])
-	var rb = Room_Builder.new()
-	rb.walls_gridmap = $Walls_GridMap
-	rb.floor_gridmap = $Floors_Gridmap
-	rb.add_room(Vector3i(10,3,10),Vector3(-5,0,-5))
+	var tiles : Array[Vector3i] 
+	for x in 12:
+		for z in 9:
+			tiles.append(Vector3i(x,0,z))
+	var room_entity = Entity_Spawner.bunker_room(tiles,3)
+	Game.current_room = room_entity
 	
 	var citizen_entity = await Entity_Spawner.citizen()
 	citizen_entity.c_add(Position_Component.new(0,0,0))

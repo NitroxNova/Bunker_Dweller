@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ECS="*res://ECS/Manager.tscn"
 HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
+Game="*res://game/game_global.tscn"
 
 [editor_plugins]
 

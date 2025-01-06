@@ -56,3 +56,10 @@ static func stone_block()->Entity:
 	entity.c_add(Needs_Render_Component.new())
 	entity.c_add(Node_Component.new(block_scene))
 	return entity
+
+static func bunker_room(_tiles:Array[Vector3i],_height:int)->Entity:
+	var entity: Entity = ECS.new_entity()
+	entity.c_add(Needs_Render_Component.new())
+	var c_room = Room_Component.new(_tiles,_height)
+	entity.c_add(c_room)	
+	return entity
