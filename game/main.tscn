@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c66gpy81shk42"]
 
-[ext_resource type="Script" path="res://game/main.gd" id="1_nxcst"]
-[ext_resource type="Script" path="res://game/camera_controls.gd" id="2_wygp8"]
+[ext_resource type="Script" uid="uid://biqwyodv4s00g" path="res://game/main.gd" id="1_nxcst"]
+[ext_resource type="Script" uid="uid://ic1pm7u8b6ag" path="res://game/camera_controls.gd" id="2_wygp8"]
 [ext_resource type="PackedScene" uid="uid://dxdwq462gx2vy" path="res://menu/game_overlay.tscn" id="3_plmsy"]
 [ext_resource type="MeshLibrary" uid="uid://c6pcaymqd7jm0" path="res://game/meshlibs/blocks.meshlib" id="4_kvyry"]
 [ext_resource type="MeshLibrary" uid="uid://ct71dsxt8bgyo" path="res://game/meshlibs/floors.meshlib" id="5_nlbja"]

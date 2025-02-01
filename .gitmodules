@@ -1,3 +1,6 @@
 [submodule "addons/humanizer"]
 	path = addons/humanizer
 	url = https://github.com/NitroxNova/humanizer
+[submodule "addons/humanizer_assets"]
+	path = addons/humanizer_assets
+	url = https://github.com/NitroxNova/humanizer_assets

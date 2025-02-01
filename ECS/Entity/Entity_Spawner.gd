@@ -6,17 +6,17 @@ const STONE_BLOCK = preload("res://game/blocks/stone/stone_block.tscn")
 static func citizen()->Entity:
 	var entity :Entity = ECS.new_entity()
 	var human_config = HumanConfig.new()
-	human_config.rig = HumanizerGlobalConfig.config.default_skeleton
+	human_config.rig = ProjectSettings.get_setting("addons/humanizer/default_skeleton")
 	human_config.add_equipment(HumanizerEquipment.new("RightEye-LowPolyEyeball"))
 	human_config.add_equipment(HumanizerEquipment.new("LeftEye-LowPolyEyeball"))
 	var c_name = NPC_Name_Component.new("",Name_Generator.random_last())
 	var gender = randi_range(0,1)
 	human_config.targets["gender"] = gender
 	if gender == 0:
-		human_config.add_equipment(HumanizerEquipment.new("DefaultBody","young_caucasian_female_special_suit"))
+		human_config.add_equipment(HumanizerEquipment.new("Body-Default","young_caucasian_female_special_suit"))
 		c_name.first = Name_Generator.random_female()
 	elif gender == 1:
-		human_config.add_equipment(HumanizerEquipment.new("DefaultBody","young_caucasian_male_special_suit"))
+		human_config.add_equipment(HumanizerEquipment.new("Body-Default","young_caucasian_male_special_suit"))
 		c_name.first = Name_Generator.random_male()
 	human_config.init_macros()	
 	var humanizer = Humanizer.new()
