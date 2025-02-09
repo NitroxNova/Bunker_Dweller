@@ -47,6 +47,16 @@ static func space_bed_king()->Entity:
 	var bed_scene = load("res://game/objects/bed/space_bed_king.tscn").instantiate()
 	entity.c_add(Needs_Render_Component.new())
 	entity.c_add(Node_Component.new(bed_scene))
+	#entity.c_add(Navigation_Obstacle_Component.new())
+	var left_interact = ECS.new_entity()
+	var l_xform = Transform_Component.new()
+	l_xform.set_position(1,0,1)
+	left_interact.c_add(l_xform)
+	left_interact.c_add(Interactable_Component.new(entity.id,["sit","sleep"]))
+	
+	var c_interact = Interactions_Component.new([left_interact.id])
+	#c_interact.add_interaction(Vector3(1,0,1),Vector3.LEFT,["sit","sleep"])
+	entity.c_add(c_interact)
 	return entity
 	
 		

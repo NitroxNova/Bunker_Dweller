@@ -17,3 +17,7 @@ func sleep():
 
 func go_to_sleep():
 	queue.push_front({name="go_to_sleep"})
+
+func interact_with(action_id:int,action_name:String): #action_id is the entity id of the interact point
+	queue.push_front({name="interact_with",action_id=action_id,action_name=action_name})
+	

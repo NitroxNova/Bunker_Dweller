@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c66gpy81shk42"]
+[gd_scene load_steps=11 format=3 uid="uid://c66gpy81shk42"]
 
 [ext_resource type="Script" uid="uid://biqwyodv4s00g" path="res://game/main.gd" id="1_nxcst"]
 [ext_resource type="Script" uid="uid://ic1pm7u8b6ag" path="res://game/camera_controls.gd" id="2_wygp8"]
@@ -20,6 +20,8 @@ sky = SubResource("Sky_bk3cb")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_dgpao"]
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_nxcst")
 
@@ -33,7 +35,7 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 shadow_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108829, 0.500753, 3.42423)
+transform = Transform3D(1, 0, 0, 0, 0.94406, 0.329773, 0, -0.329773, 0.94406, -0.108829, 5.36435, 3.42423)
 script = ExtResource("2_wygp8")
 
 [node name="Entity" type="Node3D" parent="."]
@@ -43,13 +45,18 @@ mesh_library = ExtResource("4_kvyry")
 cell_size = Vector3(1, 1, 1)
 metadata/_editor_floor_ = Vector3(0, 0, -1)
 
-[node name="Floors_Gridmap" type="GridMap" parent="."]
-mesh_library = ExtResource("5_nlbja")
-cell_size = Vector3(1, 1, 1)
-metadata/_editor_floor_ = Vector3(0, 0, -1)
-
 [node name="Walls_GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("5_opy7a")
 cell_size = Vector3(1, 1, 1)
 
 [node name="Room_Mode" type="Node3D" parent="."]
+
+[node name="Floors_Navigation" type="NavigationRegion3D" parent="."]
+unique_name_in_owner = true
+navigation_mesh = SubResource("NavigationMesh_dgpao")
+
+[node name="Floors_Gridmap" type="GridMap" parent="Floors_Navigation"]
+unique_name_in_owner = true
+mesh_library = ExtResource("5_nlbja")
+cell_size = Vector3(1, 1, 1)
+metadata/_editor_floor_ = Vector3(0, 0, -1)

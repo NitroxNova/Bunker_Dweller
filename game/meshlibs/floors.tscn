@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bxyr75sspl418"]
+[gd_scene load_steps=15 format=4 uid="uid://bxyr75sspl418"]
 
 [ext_resource type="Material" uid="uid://673uh866olg5" path="res://assets/quaternius_modular_scifi/materials/MI_Trim_03.res" id="1_4vq1m"]
 
@@ -37,6 +37,10 @@ shadow_mesh = SubResource("ArrayMesh_fvfly")
 [sub_resource type="BoxShape3D" id="BoxShape3D_2y3s0"]
 size = Vector3(1, 0.0644648, 1)
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_ixodl"]
+vertices = PackedVector3Array(-0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5)
+polygons = [PackedInt32Array(3, 1, 0), PackedInt32Array(3, 2, 1)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r375y"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_5slkh"]
@@ -68,6 +72,10 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_5slkh")
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_385rt"]
+vertices = PackedVector3Array(0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+polygons = [PackedInt32Array(2, 3, 0), PackedInt32Array(2, 1, 3)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf548"]
 
@@ -101,6 +109,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tsjvj")
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_vfpuv"]
+vertices = PackedVector3Array(-0.5, -0.5, 0.384398, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.384398, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+polygons = [PackedInt32Array(3, 0, 5), PackedInt32Array(4, 0, 3), PackedInt32Array(0, 1, 2), PackedInt32Array(0, 4, 1)]
+
 [node name="Floors" type="Node3D"]
 
 [node name="Platform_Simple_Blank" type="MeshInstance3D" parent="."]
@@ -114,6 +126,9 @@ surface_material_override/0 = ExtResource("1_4vq1m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
 shape = SubResource("BoxShape3D_2y3s0")
 
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Platform_Simple_Blank"]
+navigation_mesh = SubResource("NavigationMesh_ixodl")
+
 [node name="Platform_Simple_Line" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 mesh = SubResource("ArrayMesh_cu703")
@@ -126,6 +141,9 @@ surface_material_override/0 = ExtResource("1_4vq1m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
 shape = SubResource("BoxShape3D_2y3s0")
 
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Platform_Simple_Line"]
+navigation_mesh = SubResource("NavigationMesh_385rt")
+
 [node name="Platform_Simple_Tab" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 mesh = SubResource("ArrayMesh_rev76")
@@ -137,3 +155,6 @@ surface_material_override/0 = ExtResource("1_4vq1m")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Platform_Simple_Tab/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.531232, 0)
 shape = SubResource("BoxShape3D_2y3s0")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Platform_Simple_Tab"]
+navigation_mesh = SubResource("NavigationMesh_vfpuv")

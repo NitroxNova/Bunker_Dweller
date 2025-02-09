@@ -13,6 +13,8 @@ static func build(entity:Entity):
 		else:
 			Game.floor_gridmap.set_cell_item(coords,0,0)
 		
+		
+		
 		for nb_tile in nb_tiles:
 			if nb_tile[0] == "empty":
 				var inr_cell = load("res://game/blocks/room_mode/selected_interior.tscn").instantiate()
@@ -44,7 +46,7 @@ static func build(entity:Entity):
 		elif nb_tiles[3][0] == "empty" and nb_tiles[0][0] == "empty":
 			Game.wall_gridmap.set_cell_item(coords,2,10)
 		elif nb_tiles[0][0] == "empty":
-			if coords.x % 3 == 1:
+			if coords.x % 3 == 1: #column
 				Game.wall_gridmap.set_cell_item(coords,0,16)
 			else:
 				Game.wall_gridmap.set_cell_item(coords,1,16)

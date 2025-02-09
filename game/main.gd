@@ -16,20 +16,26 @@ func _ready() -> void:
 	build_cave()
 	
 	var tiles : Array[Vector3i] 
-	for x in 12:
-		for z in 9:
+	for x in 15:
+		for z in 15:
 			tiles.append(Vector3i(x,0,z))
 	var room_entity = Entity_Spawner.bunker_room(tiles,3)
 	Game.current_room = room_entity
 	
 	var citizen_entity = await Entity_Spawner.citizen()
-	citizen_entity.c_add(Position_Component.new(0,0,0))
+	var c_xform = Transform_Component.new()
+	c_xform.set_position(1,0,1)
+	citizen_entity.c_add(c_xform)
 	
 	var citizen_entity2 = await Entity_Spawner.citizen()
-	citizen_entity2.c_add(Position_Component.new(1,0,2))
+	c_xform = Transform_Component.new()
+	c_xform.set_position(2,0,2)
+	citizen_entity2.c_add(c_xform)
 	
 	var bed_entity = Entity_Spawner.space_bed_king()
-	bed_entity.c_add(Position_Component.new(3,0,-1))
+	c_xform = Transform_Component.new()
+	c_xform.set_position(5,0,7)
+	bed_entity.c_add(c_xform)
 	
 	citizen_entity.c_get("Citizen").bed = bed_entity.id
 	citizen_entity.c_get("Sleep_Need").value = 32
