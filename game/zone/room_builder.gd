@@ -13,30 +13,6 @@ static func build(entity:Entity):
 		else:
 			Game.floor_gridmap.set_cell_item(coords,0,0)
 		
-		
-		
-		for nb_tile in nb_tiles:
-			if nb_tile[0] == "empty":
-				var inr_cell = load("res://game/blocks/room_mode/selected_interior.tscn").instantiate()
-				inr_cell.position = coords
-				inr_cell.position += Vector3(.5,.5,.5)
-				Game.room_mode.add_child(inr_cell) 	
-				var area : Area3D = inr_cell.get_node("Area3D")
-				area.input_event.connect(Input_System.interior_room_cell_clicked.bind(coords))
-				break	
-			
-		for nb_tile in nb_tiles:
-			if nb_tile[0] == "empty":
-				var ext_cell = load("res://game/blocks/room_mode/expandable_exterior.tscn").instantiate()
-				ext_cell.position = nb_tile[1]
-				ext_cell.position += Vector3(.5,.5,.5)
-				Game.room_mode.add_child(ext_cell) 
-				var area = ext_cell.get_node("Area3D")
-				area.input_event.connect(Input_System.exterior_room_cell_clicked.bind(nb_tile[1]))
-		
-		#if Vector2(coords.x,coords.z) in c_room.doors:
-			#continue
-		
 		if nb_tiles[0][0] == "empty" and nb_tiles[1][0] == "empty":
 			Game.wall_gridmap.set_cell_item(coords,2,16)
 		elif nb_tiles[1][0] == "empty" and nb_tiles[2][0] == "empty":
@@ -65,14 +41,14 @@ static func build(entity:Entity):
 				Game.wall_gridmap.set_cell_item(coords,0,10)
 			else:
 				Game.wall_gridmap.set_cell_item(coords,1,10)
+	Game.get_node("/root/Main/%Floors_Navigation").bake_navigation_mesh()
 
 static func clear_room(entity:Entity):
 	var c_room : Room_Component = entity.c_get("Room")
 	for coords in c_room.floor_tiles:
 		Game.floor_gridmap.set_cell_item(coords,-1)
 		Game.wall_gridmap.set_cell_item(coords,-1)
-		for child in Game.room_mode.get_children():
-			child.queue_free()
+		
 
 static func get_neighbor_tiles(coords,tiles):
 	var nb_tiles = []

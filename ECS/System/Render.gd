@@ -11,7 +11,6 @@ static func run(delta):
 			var c_room : Room_Component = entity.c_get("Room")
 			var room_builder = Room_Builder.build(entity)
 			
-			Game.get_node("/root/Main/%Floors_Navigation").bake_navigation_mesh()
 		else:	
 			var c_transform : Transform_Component = entity.c_get("Transform")
 			var c_node: Node_Component = entity.c_get("Node")

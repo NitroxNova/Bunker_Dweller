@@ -41,7 +41,6 @@ humanizer/default_rigidbody_script=""
 humanizer/default_staticbody_script=""
 humanizer/default_area_script=""
 humanizer/default_skeleton="game_engine-RETARGETED"
-humanizer/default_animation_tree="res://addons/humanizer/data/animations/animation_tree"
 humanizer/default_baked_root_node="CharacterBody3D"
 humanizer/character_physics_layers=2
 humanizer/character_physics_mask=3
@@ -50,6 +49,7 @@ humanizer/physical_bone_layers=4
 humanizer/physical_bone_mask=5
 humanizer/character_render_layers=1
 humanizer/atlas_resolution=2048
+humanizer/default_animation_tree="res://humanizer/animation_tree.tscn"
 
 [application]
 

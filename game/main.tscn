@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c66gpy81shk42"]
+[gd_scene load_steps=12 format=3 uid="uid://c66gpy81shk42"]
 
 [ext_resource type="Script" uid="uid://biqwyodv4s00g" path="res://game/main.gd" id="1_nxcst"]
 [ext_resource type="Script" uid="uid://ic1pm7u8b6ag" path="res://game/camera_controls.gd" id="2_wygp8"]
@@ -6,6 +6,7 @@
 [ext_resource type="MeshLibrary" uid="uid://c6pcaymqd7jm0" path="res://game/meshlibs/blocks.meshlib" id="4_kvyry"]
 [ext_resource type="MeshLibrary" uid="uid://ct71dsxt8bgyo" path="res://game/meshlibs/floors.meshlib" id="5_nlbja"]
 [ext_resource type="MeshLibrary" uid="uid://b5m52iu6u7by3" path="res://game/meshlibs/walls.meshlib" id="5_opy7a"]
+[ext_resource type="Script" uid="uid://dcw5658wqi5go" path="res://game/room_mode.gd" id="6_wjctj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_c3chm"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -50,6 +51,8 @@ mesh_library = ExtResource("5_opy7a")
 cell_size = Vector3(1, 1, 1)
 
 [node name="Room_Mode" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_wjctj")
 
 [node name="Floors_Navigation" type="NavigationRegion3D" parent="."]
 unique_name_in_owner = true

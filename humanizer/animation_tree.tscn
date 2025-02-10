@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://csan8bknfmodc"]
+
+[ext_resource type="AnimationLibrary" uid="uid://cuxxbj7avet71" path="res://addons/humanizer/data/animations/animations.glb" id="2_a0fcn"]
+[ext_resource type="AnimationLibrary" uid="uid://deo0unljdiqdl" path="res://humanizer/animation/rpg.res" id="2_rioju"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_veuch"]
+animation = &"animations/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6i8n6"]
+animation = &"animations/Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rioju"]
+animation = &"rpg/Stand To Sit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bnwo7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_enrgu"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x18jg"]
+xfade_time = 0.2
+advance_mode = 2
+advance_expression = "not moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ke7qd"]
+advance_mode = 2
+advance_condition = &"sit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gifdu"]
+xfade_time = 1.0
+advance_mode = 2
+advance_condition = &"stand"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1sk7a"]
+states/Start/position = Vector2(249, 115)
+states/animations_Idle/node = SubResource("AnimationNodeAnimation_veuch")
+states/animations_Idle/position = Vector2(430, 115)
+states/animations_Run/node = SubResource("AnimationNodeAnimation_6i8n6")
+states/animations_Run/position = Vector2(698, 73)
+"states/rpg_Stand To Sit/node" = SubResource("AnimationNodeAnimation_rioju")
+"states/rpg_Stand To Sit/position" = Vector2(597, 242)
+transitions = ["Start", "animations_Idle", SubResource("AnimationNodeStateMachineTransition_bnwo7"), "animations_Idle", "animations_Run", SubResource("AnimationNodeStateMachineTransition_enrgu"), "animations_Run", "animations_Idle", SubResource("AnimationNodeStateMachineTransition_x18jg"), "animations_Idle", "rpg_Stand To Sit", SubResource("AnimationNodeStateMachineTransition_ke7qd"), "rpg_Stand To Sit", "animations_Idle", SubResource("AnimationNodeStateMachineTransition_gifdu")]
+graph_offset = Vector2(-19, 64)
+
+[node name="AnimationTree" type="AnimationTree"]
+active = false
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_1sk7a")
+anim_player = NodePath("AnimationPlayer")
+parameters/conditions/sit = false
+parameters/conditions/stand = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"animations": ExtResource("2_a0fcn"),
+&"rpg": ExtResource("2_rioju")
+}

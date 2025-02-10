@@ -9,6 +9,8 @@ static func process_entity(entity_id:int,delta:float):
 	var entity :Entity = ECS.get_entity(entity_id)
 	var c_task :Task_Component = entity.c_get("Task")
 	var c_node : Node_Component = entity.c_get("Node")
+	var node :CharacterBody3D = c_node.node
+	var animation_tree:AnimationTree = node.get_node("AnimationTree")
 	var c_sleep_need : Sleep_Need_Component = entity.c_get("Sleep_Need")
 	if c_task.queue.is_empty():
 		if c_sleep_need.value < 30:
@@ -26,7 +28,6 @@ static func process_entity(entity_id:int,delta:float):
 			return
 	var current_task : Dictionary = c_task.queue[0]
 	
-	var node :CharacterBody3D = c_node.node
 	if current_task.name == "stand_still":
 		node.moving = false
 		current_task.time -= delta
@@ -35,9 +36,13 @@ static func process_entity(entity_id:int,delta:float):
 			return
 	elif current_task.name == "sleep":
 		node.moving = false
+		animation_tree.set("parameters/conditions/sit",true)
+		animation_tree.set("parameters/conditions/stand",false)
 		if c_sleep_need.value > 100:
 			c_task.queue.pop_front()
 			c_task.queue.pop_front() #exit the interact with
+			animation_tree.set("parameters/conditions/sit",false)
+			animation_tree.set("parameters/conditions/stand",true)
 	elif current_task.name == "go_to_sleep":
 		var c_citizen : Citizen_Component = entity.c_get("Citizen")
 		var bed_id = c_citizen.bed

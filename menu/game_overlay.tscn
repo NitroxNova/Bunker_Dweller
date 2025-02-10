@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dxdwq462gx2vy"]
 
-[ext_resource type="Script" path="res://menu/game_overlay.gd" id="1_pi1l3"]
+[ext_resource type="Script" uid="uid://cwi60polhx3d3" path="res://menu/game_overlay.gd" id="1_pi1l3"]
 
 [node name="GameOverlay" type="Control"]
 layout_mode = 3
@@ -12,37 +12,54 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_pi1l3")
 
-[node name="TopBar" type="HBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Date_Time" type="Label" parent="TopBar"]
+[node name="TopBar" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Slower" type="Button" parent="TopBar"]
+[node name="Date_Time" type="Label" parent="VBoxContainer/TopBar"]
+layout_mode = 2
+
+[node name="Slower" type="Button" parent="VBoxContainer/TopBar"]
 layout_mode = 2
 text = "slower"
 
-[node name="Faster" type="Button" parent="TopBar"]
+[node name="Faster" type="Button" parent="VBoxContainer/TopBar"]
 layout_mode = 2
 text = "faster "
 
-[node name="Speed_Label" type="Label" parent="TopBar"]
+[node name="Speed_Label" type="Label" parent="VBoxContainer/TopBar"]
 layout_mode = 2
 text = " 1x"
 
-[node name="Label" type="Label" parent="TopBar"]
+[node name="ModeButton" type="OptionButton" parent="VBoxContainer/TopBar"]
+unique_name_in_owner = true
 layout_mode = 2
-text = " -- Change Mode --"
+selected = 0
+item_count = 2
+popup/item_0/text = "Live Mode"
+popup/item_0/id = 0
+popup/item_1/text = "Build Mode"
+popup/item_1/id = 1
 
-[node name="Room_Mode" type="Button" parent="TopBar"]
+[node name="BuildModeBar" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-text = "Room"
 
-[node name="Live_Mode" type="Button" parent="TopBar"]
+[node name="BuildOptionsButton" type="OptionButton" parent="VBoxContainer/BuildModeBar"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Live"
+selected = 0
+item_count = 2
+popup/item_0/text = "Edit Room"
+popup/item_0/id = 1
+popup/item_1/text = "New Room"
+popup/item_1/id = 0
 
 [node name="Selected" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -75,5 +92,7 @@ text = "sleep"
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 2
 
-[connection signal="pressed" from="TopBar/Slower" to="." method="_on_slower_pressed"]
-[connection signal="pressed" from="TopBar/Faster" to="." method="_on_faster_pressed"]
+[connection signal="pressed" from="VBoxContainer/TopBar/Slower" to="." method="_on_slower_pressed"]
+[connection signal="pressed" from="VBoxContainer/TopBar/Faster" to="." method="_on_faster_pressed"]
+[connection signal="item_selected" from="VBoxContainer/TopBar/ModeButton" to="." method="_on_mode_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/BuildModeBar/BuildOptionsButton" to="." method="_on_build_options_button_item_selected"]
