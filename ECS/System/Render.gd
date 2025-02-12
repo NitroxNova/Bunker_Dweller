@@ -4,7 +4,7 @@ class_name Render_System
 # "rendering" is just adding an instance of the scene to the tree
 static func run(delta):
 	for entity_id in ECS.c_get("Needs_Render"):
-		print("rendering " + str(entity_id))
+		#print("rendering " + str(entity_id))
 		var entity :Entity = ECS.get_entity(entity_id)
 		var c_needs_render :Needs_Render_Component = entity.c_get("Needs_Render")
 		if entity.c_has("Room"):
@@ -34,4 +34,5 @@ static func run(delta):
 			entity.c_add(Node_Component.new(node))
 			ECS.spawn_entity_node(node)
 		entity.c_remove("Needs_Render")
+		entity.rendered.emit()
 		

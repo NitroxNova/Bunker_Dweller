@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://c4oye4komsjv3"]
+[gd_scene load_steps=15 format=4 uid="uid://c4oye4komsjv3"]
 
 [ext_resource type="Texture2D" uid="uid://b2eigcx76l8m7" path="res://game/blocks/stone/stone_texture.jpg" id="1_cyh44"]
 [ext_resource type="Texture2D" uid="uid://cpdm88db463mh" path="res://game/blocks/scaffolding/bamboo-mat-ft.jpg" id="2_2p33r"]
+[ext_resource type="Texture2D" uid="uid://i760uidp757l" path="res://game/blocks/stone/red_rock.png" id="2_ls1tm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bg2x6"]
 resource_name = "Material"
@@ -46,6 +47,9 @@ albedo_texture = ExtResource("1_cyh44")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1m4d2"]
 data = PackedVector3Array(0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_at32w"]
+albedo_texture = ExtResource("2_ls1tm")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yohil"]
 albedo_texture = ExtResource("2_2p33r")
@@ -97,8 +101,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_iymwa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stone_Block/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1m4d2")
 
-[node name="Scaffolding" type="MeshInstance3D" parent="."]
+[node name="Red_Stone" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+mesh = SubResource("ArrayMesh_1c02o")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_at32w")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Red_Stone"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Red_Stone/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1m4d2")
+
+[node name="Scaffolding" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 material_override = SubResource("StandardMaterial3D_yohil")
 mesh = SubResource("ArrayMesh_0c6xe")
 skeleton = NodePath("")

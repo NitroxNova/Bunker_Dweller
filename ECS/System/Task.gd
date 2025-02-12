@@ -17,15 +17,13 @@ static func process_entity(entity_id:int,delta:float):
 			c_task.go_to_sleep()
 			return
 		if randi_range(0,1) == 0:
-			var nav_agent = entity.get_node().get_node("NavigationAgent3D")
 			var map_id = NavigationServer3D.get_maps()[0]
 			var target_position = NavigationServer3D.map_get_random_point(map_id,1,false)
-			c_task.walk_to(target_position)
+			try_walk_to(target_position,entity)
 			return
-		else:
-			var idle_time = randf_range(3,10)
-			c_task.stand_still(idle_time)
-			return
+		var idle_time = randf_range(3,10)
+		c_task.stand_still(idle_time)
+		return
 	var current_task : Dictionary = c_task.queue[0]
 	
 	if current_task.name == "stand_still":
@@ -64,10 +62,12 @@ static func process_entity(entity_id:int,delta:float):
 		return  
 		
 	elif current_task.name == "walk_to":
-		
 		var nav_agent : NavigationAgent3D = node.get_node("NavigationAgent3D")
-		nav_agent.target_position = current_task.position
-		var next_pos = nav_agent.get_next_path_position()
+		if nav_agent == null:
+			return #nav agent not loaded
+		
+		var prev_position :Vector3 = node.global_position
+		var next_pos:Vector3 = nav_agent.get_next_path_position()
 		next_pos -= Vector3(0,.5,0)
 		
 		if nav_agent.is_target_reached():
@@ -76,21 +76,41 @@ static func process_entity(entity_id:int,delta:float):
 			node.moving = false
 			return
 		#previous distance
-		if abs(current_task.prev_distance - nav_agent.distance_to_target()) < .0000001:
-			#cant reach, clear task
-			c_task.queue.pop_front()
-			node.moving = false
-			return
+			
 		
 		var displacement : Vector3= next_pos - node.global_transform.origin
 		var distance := displacement.length()	
-		current_task.prev_distance = distance	
 		var direction := displacement / distance # With caveats, see below
 		var max_speed := (distance / delta)
 		node.velocity = direction * minf(node.move_speed, max_speed)
 		node.transform.basis = Basis.looking_at(-direction)
 		node.moving = true
-		node.move_and_slide()
+		node.position += node.velocity*delta
+		#node.move_and_slide()
 		
-		#print("walking to " + str(current_task[1]))
-		
+		#if current_task.prev_position == node.global_position:
+			##is stuck, teleport
+			#print("is stuck")
+			#node.global_position += node.velocity 
+			#
+		#else:
+			#node.move_and_slide()
+		##if stuck, will move forward and then back in the next frame
+		#
+		#current_task.prev_position = node.global_position
+			
+
+static func try_walk_to(target_position:Vector3,entity:Entity)->bool:
+	var node = entity.get_node()
+	var curr_position = node.global_position
+	var nav_agent : NavigationAgent3D = node.get_node("NavigationAgent3D")
+	if nav_agent == null:
+		return false
+	nav_agent.target_position = target_position
+	if not nav_agent.is_target_reachable():
+		nav_agent.target_position = curr_position
+		return false
+	var c_task :Task_Component = entity.c_get("Task")
+	c_task.walk_to(target_position)
+	return true
+			

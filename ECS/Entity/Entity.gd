@@ -3,6 +3,8 @@ class_name Entity
 
 var id : int
 
+signal rendered
+
 func _init(_id):
 	id = _id
 	

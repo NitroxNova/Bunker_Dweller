@@ -5,8 +5,7 @@ var queue = []
 
 func walk_to(position:Vector3):
 	queue.push_front({name="walk_to",
-		position=position,
-		prev_distance=-1})
+		prev_position=Vector3.ZERO})
 
 func stand_still(time:float):
 	queue.push_front({name="stand_still",

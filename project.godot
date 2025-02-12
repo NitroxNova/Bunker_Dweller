@@ -61,8 +61,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 ECS="*res://ECS/Manager.tscn"
-HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
 Game="*res://game/game_global.tscn"
+HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
 
 [editor_plugins]
 

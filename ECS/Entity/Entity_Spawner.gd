@@ -3,7 +3,7 @@ class_name Entity_Spawner
 
 const STONE_BLOCK = preload("res://game/blocks/stone/stone_block.tscn")
 
-static func citizen()->Entity:
+static func citizen(position:Vector3)->Entity:
 	var entity :Entity = ECS.new_entity()
 	var human_config = HumanConfig.new()
 	human_config.rig = ProjectSettings.get_setting("addons/humanizer/default_skeleton")
@@ -33,6 +33,9 @@ static func citizen()->Entity:
 	entity.c_add(c_name)
 	entity.c_add(Task_Component.new())
 	entity.c_add(Sleep_Need_Component.new())
+	var x_form = Transform_Component.new()
+	x_form.set_position(position)
+	entity.c_add(x_form)
 	return entity
 	
 static func bed()->Entity:
@@ -50,7 +53,7 @@ static func space_bed_king()->Entity:
 	#entity.c_add(Navigation_Obstacle_Component.new())
 	var left_interact = ECS.new_entity()
 	var l_xform = Transform_Component.new()
-	l_xform.set_position(1,0,1)
+	l_xform.set_position(Vector3(1,0,1))
 	left_interact.c_add(l_xform)
 	left_interact.c_add(Interactable_Component.new(entity.id,["sit","sleep"]))
 	
@@ -73,3 +76,14 @@ static func bunker_room(_tiles:Array[Vector3i],_height:int)->Entity:
 	var c_room = Room_Component.new(_tiles,_height)
 	entity.c_add(c_room)	
 	return entity
+
+static func starter_ship(position:Vector3)->Entity:
+	var entity: Entity = ECS.new_entity()
+	var ship_scene = load("res://game/objects/starter_ship/starter_ship.tscn").instantiate()
+	entity.c_add(Needs_Render_Component.new())
+	entity.c_add(Node_Component.new(ship_scene))
+	var x_form = Transform_Component.new()
+	x_form.set_position(position)
+	entity.c_add(x_form)
+	return entity
+	
