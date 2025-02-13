@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://b11d08tn5phfx"]
+
+[ext_resource type="Theme" uid="uid://c3d0n4xxeaiko" path="res://menu/bunker_theme.theme" id="1_m6yha"]
+[ext_resource type="Script" uid="uid://csxc6rd53lqu6" path="res://menu/start/start_menu.gd" id="2_885aq"]
+[ext_resource type="Texture2D" uid="uid://tmudk5l5dyl2" path="res://menu/start/start_menu_bg.png" id="2_a7qa2"]
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_m6yha")
+script = ExtResource("2_885aq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_a7qa2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Bunker Dweller"
+horizontal_alignment = 1
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Game"
+
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]

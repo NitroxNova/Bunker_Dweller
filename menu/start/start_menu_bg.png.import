@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2hn3u4as3ve5"
-path="res://.godot/imported/Atlas.png-8fe44384ce4a38cec65e62bee26e0811.ctex"
+uid="uid://tmudk5l5dyl2"
+path="res://.godot/imported/start_menu_bg.png-b57247c2d9454f7170d56f6d6261013c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/quaternius_space_kit/Atlas.png"
-dest_files=["res://.godot/imported/Atlas.png-8fe44384ce4a38cec65e62bee26e0811.ctex"]
+source_file="res://menu/start/start_menu_bg.png"
+dest_files=["res://.godot/imported/start_menu_bg.png-b57247c2d9454f7170d56f6d6261013c.ctex"]
 
 [params]
 

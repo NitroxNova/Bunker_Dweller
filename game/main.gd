@@ -11,6 +11,7 @@ var threads : Array[Thread] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Game.init_game_nodes()
 	World_Builder.initialize()
 	for x in range(-1,1):
 		for y in range(-1,1):
@@ -23,13 +24,15 @@ func _input(event: InputEvent) -> void:
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
 			Game.get_node("/root/Main/Target").position = point
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
 			var starter_ship : Entity = Entity_Spawner.starter_ship(point)
 			starter_ship.rendered.connect(on_starter_ship_rendered.bind(starter_ship))
 			#print($GridMap.local_to_map(point))
 			Game.mode = Game.MODE_OPTIONS.live
+	elif Input.is_action_just_pressed("escape"):
+		Game.mode = Game.MODE_OPTIONS.pause
 
 func on_starter_ship_rendered(ship_entity:Entity):
 	ship_entity.get_node().play_landing_sequence()

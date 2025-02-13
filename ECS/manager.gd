@@ -14,9 +14,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	Render_System.run(delta)
-	Task_System.run(delta)
-	Sleep_System.run(delta)
+	if Game.mode != Game.MODE_OPTIONS.start_menu:
+		Render_System.run(delta)
+		Task_System.run(delta)
+		Sleep_System.run(delta)
+
+func reset():
+	entity_list = {}
+	for c_name in component_list:
+		component_list[c_name] = {}
 
 func spawn_entity_node(node:Node3D):
 	get_node("/root/Main/Entity").add_child(node)

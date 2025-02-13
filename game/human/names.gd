@@ -1,5 +1,5 @@
 extends Resource
-class_name Name_Generator
+class_name Human_Name_Generator
 
 const LAST = ["Anderson","Brown","Davis","Jackson","Johnson","Jones","Lee","Martin","Miller","Moore","Smith","Taylor","Thomas","Thompson","White","Williams","Wilson"]
 const MALE = ["Albert","Arthur","Charles","Clarence","David","Edward","Frank","Fred","George","Harry","Henry","James","Joe","John","Joseph","Louis","Randy","Robert","Samuel","Thomas","Walter","William"]
