@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c66gpy81shk42"]
+[gd_scene load_steps=17 format=3 uid="uid://c66gpy81shk42"]
 
 [ext_resource type="Script" uid="uid://biqwyodv4s00g" path="res://game/main.gd" id="1_nxcst"]
 [ext_resource type="Script" uid="uid://ic1pm7u8b6ag" path="res://game/camera_controls.gd" id="2_wygp8"]
 [ext_resource type="PackedScene" uid="uid://dxdwq462gx2vy" path="res://menu/game_overlay.tscn" id="3_plmsy"]
 [ext_resource type="MeshLibrary" uid="uid://c6pcaymqd7jm0" path="res://game/meshlibs/blocks.meshlib" id="4_kvyry"]
-[ext_resource type="MeshLibrary" uid="uid://ct71dsxt8bgyo" path="res://game/meshlibs/floors.meshlib" id="5_nlbja"]
 [ext_resource type="MeshLibrary" uid="uid://b5m52iu6u7by3" path="res://game/meshlibs/walls.meshlib" id="5_opy7a"]
 [ext_resource type="Script" uid="uid://dcw5658wqi5go" path="res://game/room_mode.gd" id="6_wjctj"]
 [ext_resource type="Texture2D" uid="uid://byx3nhpcyxq77" path="res://assets/target.png" id="8_xkbyp"]
@@ -24,6 +23,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_dgpao"]
+agent_radius = 0.0
 agent_max_climb = 1.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_lx3aj"]
@@ -35,6 +35,13 @@ transparency = 1
 depth_draw_mode = 2
 albedo_color = Color(1, 1, 1, 0.372549)
 albedo_texture = ExtResource("8_xkbyp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_xkbyp"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lx3aj"]
+transparency = 1
+albedo_color = Color(1, 0, 0.027451, 0.513726)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_nxcst")
@@ -54,10 +61,6 @@ script = ExtResource("2_wygp8")
 
 [node name="Entity" type="Node3D" parent="."]
 
-[node name="Walls_GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("5_opy7a")
-cell_size = Vector3(1, 1, 1)
-
 [node name="Room_Mode" type="Node3D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("6_wjctj")
@@ -66,17 +69,17 @@ script = ExtResource("6_wjctj")
 unique_name_in_owner = true
 navigation_mesh = SubResource("NavigationMesh_dgpao")
 
-[node name="Floors_Gridmap" type="GridMap" parent="Floors_Navigation"]
-unique_name_in_owner = true
-mesh_library = ExtResource("5_nlbja")
-cell_size = Vector3(1, 1, 1)
-metadata/_editor_floor_ = Vector3(0, 0, -1)
-
 [node name="Blocks_Gridmap" type="GridMap" parent="Floors_Navigation"]
 unique_name_in_owner = true
 mesh_library = ExtResource("4_kvyry")
 cell_size = Vector3(1, 1, 1)
 metadata/_editor_floor_ = Vector3(0, 0, -1)
+
+[node name="Walls_GridMap" type="GridMap" parent="Floors_Navigation"]
+unique_name_in_owner = true
+mesh_library = ExtResource("5_opy7a")
+cell_size = Vector3(1, 1, 1)
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="Target" type="MeshInstance3D" parent="."]
 visible = false
@@ -87,3 +90,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_itumj")
 unique_name_in_owner = true
 process_mode = 2
 visible = false
+
+[node name="Block_Selector" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+visible = false
+mesh = SubResource("BoxMesh_xkbyp")
+surface_material_override/0 = SubResource("StandardMaterial3D_lx3aj")

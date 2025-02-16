@@ -43,26 +43,32 @@ text = " 1x"
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
-item_count = 2
+item_count = 3
 popup/item_0/text = "Live Mode"
 popup/item_0/id = 0
-popup/item_1/text = "Build Mode"
+popup/item_1/text = "Room Mode"
 popup/item_1/id = 1
+popup/item_2/text = "Block Mode"
+popup/item_2/id = 2
 
-[node name="BuildModeBar" type="HBoxContainer" parent="VBoxContainer"]
+[node name="RoomModeBar" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="BuildOptionsButton" type="OptionButton" parent="VBoxContainer/BuildModeBar"]
+[node name="RoomOptionsButton" type="OptionButton" parent="VBoxContainer/RoomModeBar"]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
-item_count = 2
-popup/item_0/text = "Edit Room"
-popup/item_0/id = 1
-popup/item_1/text = "New Room"
-popup/item_1/id = 0
+item_count = 4
+popup/item_0/text = "Select Room"
+popup/item_0/id = 3
+popup/item_1/text = "Edit Room"
+popup/item_1/id = 1
+popup/item_2/text = "Place Doors"
+popup/item_2/id = 2
+popup/item_3/text = "New Room"
+popup/item_3/id = 0
 
 [node name="Selected" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -98,4 +104,4 @@ layout_mode = 2
 [connection signal="pressed" from="VBoxContainer/TopBar/Slower" to="." method="_on_slower_pressed"]
 [connection signal="pressed" from="VBoxContainer/TopBar/Faster" to="." method="_on_faster_pressed"]
 [connection signal="item_selected" from="VBoxContainer/TopBar/ModeButton" to="." method="_on_mode_button_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/BuildModeBar/BuildOptionsButton" to="." method="_on_build_options_button_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/RoomModeBar/RoomOptionsButton" to="." method="_on_room_options_button_item_selected"]

@@ -62,11 +62,6 @@ config/icon="res://icon.svg"
 
 ECS="*res://ECS/Manager.tscn"
 Game="*res://game/game_global.tscn"
-HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/humanizer/plugin.cfg")
 
 [filesystem]
 

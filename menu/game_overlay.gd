@@ -39,16 +39,22 @@ func _on_mode_button_item_selected(index: int) -> void:
 	var button_text = %ModeButton.get_item_text(index)
 	if button_text == "Live Mode":
 		Game.mode = Game.MODE_OPTIONS.live
-		%BuildModeBar.hide()
-	elif button_text == "Build Mode":
-		Game.mode = Game.MODE_OPTIONS.edit_room
-		%BuildModeBar.show()
+		%RoomModeBar.hide()
+	elif button_text == "Room Mode":
+		Game.mode = Game.MODE_OPTIONS.select_room
+		%RoomModeBar.show()
+	elif button_text == "Block Mode":
+		Game.mode = Game.MODE_OPTIONS.destroy_blocks
+		%RoomModeBar.hide()
 
-
-func _on_build_options_button_item_selected(index: int) -> void:
-	var button_text = %BuildOptionsButton.get_item_text(index)
+func _on_room_options_button_item_selected(index: int) -> void:
+	var button_text = %RoomOptionsButton.get_item_text(index)
 	if button_text == "New Room":
 		Game.mode = Game.MODE_OPTIONS.new_room
+	elif button_text == "Place Doors":
+		Game.mode = Game.MODE_OPTIONS.place_doors
 	elif button_text == "Edit Room":
 		Game.mode = Game.MODE_OPTIONS.edit_room
+	elif button_text == "Select Room":
+		Game.mode = Game.MODE_OPTIONS.select_room
 		

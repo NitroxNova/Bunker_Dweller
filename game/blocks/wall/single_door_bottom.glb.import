@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://52bgju22a3d7"
-path="res://.godot/imported/WallAstra_Pillar.glb-ac31efa269ddfff09e435455e5fa1e32.scn"
+uid="uid://cu5gyh2vccr7n"
+path="res://.godot/imported/single_door_bottom.glb-6dee4327aa838ffd0e90e955600be874.scn"
 
 [deps]
 
-source_file="res://assets/quaternius_modular_scifi/objects/WallAstra_Pillar.glb"
-dest_files=["res://.godot/imported/WallAstra_Pillar.glb-ac31efa269ddfff09e435455e5fa1e32.scn"]
+source_file="res://game/blocks/wall/single_door_bottom.glb"
+dest_files=["res://.godot/imported/single_door_bottom.glb-6dee4327aa838ffd0e90e955600be874.scn"]
 
 [params]
 

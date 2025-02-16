@@ -22,10 +22,6 @@ static func build_world(chunk_id:Vector3i):
 					var block = Cave_Generator.get_block(Vector3i(x,y,z))
 					if block == Cave_Generator.BLOCKS.stone:
 						Game.blocks_gridmap.set_cell_item(Vector3i(x,y,z),0,randi_range(0,24))
-				#for y in range(height-2,height+1):
-					#if y >= chunk_id.y*16 and y < (chunk_id.y+1)*16:
-						#Game.blocks_gridmap.set_cell_item(Vector3i(x,y,z),1,randi_range(0,24))
-				#if height-3 >= chunk_id.y*16:
 				
 
 static func get_terrain_height(block_pos:Vector2i)->int: #x and z

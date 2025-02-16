@@ -11,6 +11,28 @@ var threads : Array[Thread] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#%Floors_Navigation.bake_navigation_mesh()
+	#return
+	Game.init_game_nodes()
+	World_Builder.initialize()
+	for x in range(0,1):
+		for y in range(0,1):
+			for z in range(0,1):
+				Cave_Generator.build_cave(Vector3i(x,y,z))
+	
+	var tiles:Array[Vector2i] = []
+	for x in range(-2,2):
+		for z in range(-2,2):
+			tiles.append(Vector2i(x,z))
+	
+	var doors : Array[Vector2i] = []
+	doors.append(Vector2i(0,1))
+	var first_room = Entity_Spawner.bunker_room(tiles,5,3,doors,Room_Component.TYPE_OPTIONS.airlock)
+	Game.current_room = first_room				
+	Game.mode = Game.MODE_OPTIONS.live
+	
+#for later	
+func build_overworld():
 	Game.init_game_nodes()
 	World_Builder.initialize()
 	for x in range(-1,1):
@@ -24,6 +46,11 @@ func _input(event: InputEvent) -> void:
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
 			Game.get_node("/root/Main/Target").position = point
+		elif Game.mode == Game.MODE_OPTIONS.destroy_blocks:
+			var point = get_point_under_cursor()
+			var grid_pos = Vector3(Game.blocks_gridmap.local_to_map(point))
+			grid_pos += Vector3(.5,.5,.5)
+			%Block_Selector.position = grid_pos
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
@@ -31,6 +58,12 @@ func _input(event: InputEvent) -> void:
 			starter_ship.rendered.connect(on_starter_ship_rendered.bind(starter_ship))
 			#print($GridMap.local_to_map(point))
 			Game.mode = Game.MODE_OPTIONS.live
+		elif Game.mode == Game.MODE_OPTIONS.destroy_blocks:
+			var point = get_point_under_cursor()
+			var grid_pos = Vector3(Game.blocks_gridmap.local_to_map(point))
+			var block = Game.blocks_gridmap.get_cell_item(grid_pos)
+			if block < Game.BLOCK_OPTIONS.white_floor:
+				Game.blocks_gridmap.set_cell_item(grid_pos,-1)
 	elif Input.is_action_just_pressed("escape"):
 		Game.mode = Game.MODE_OPTIONS.pause
 
