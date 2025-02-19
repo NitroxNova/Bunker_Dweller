@@ -30,9 +30,17 @@ static func run(delta):
 				nav_obs.position = node.position
 				Game.get_node("/root/Main/%Floors_Navigation").add_child(nav_obs)
 				Game.get_node("/root/Main/%Floors_Navigation").bake_navigation_mesh()
-				
-			entity.c_add(Node_Component.new(node))
 			ECS.spawn_entity_node(node)
+			entity.c_add(Node_Component.new(node))
+			for child in node.get_children():
+				if child is Interaction_Point:					
+					var interact_entity = ECS.new_entity()
+					interact_entity.c_add(Transform_Component.new(child.global_transform))
+					#Game.get_node("/root/Main/Target").global_transform = child.global_transform
+					interact_entity.c_add(Interactable_Component.new(entity.id,child.type))
+					node.remove_child(child)
+					#do we need to add interactions to main object?
+					
 		entity.c_remove("Needs_Render")
 		entity.rendered.emit()
 		

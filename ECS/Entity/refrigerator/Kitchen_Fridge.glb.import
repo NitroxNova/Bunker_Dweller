@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cthjniu6vtgeg"
-path="res://.godot/imported/twin_bed.glb-f5a5fc5f7bdcc1c1910b11d478db6869.scn"
+uid="uid://to45qgmtpicl"
+path="res://.godot/imported/Kitchen_Fridge.glb-135d94ee73baecd1c25c50abd8e71a70.scn"
 
 [deps]
 
-source_file="res://game/objects/bed/twin_bed.glb"
-dest_files=["res://.godot/imported/twin_bed.glb-f5a5fc5f7bdcc1c1910b11d478db6869.scn"]
+source_file="res://ECS/Entity/refrigerator/Kitchen_Fridge.glb"
+dest_files=["res://.godot/imported/Kitchen_Fridge.glb-135d94ee73baecd1c25c50abd8e71a70.scn"]
 
 [params]
 

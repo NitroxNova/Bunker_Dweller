@@ -3,6 +3,17 @@ extends Node3D
 var EXTERIOR_CELL = load("res://game/blocks/room_mode/expandable_exterior.tscn")
 var INTERIOR_CELL = load("res://game/blocks/room_mode/selected_interior.tscn")
 
+func place_furniture():
+	clear()
+	var furniture_options :OptionButton = get_node("/root/Main/GameOverlay/%RoomTypeOptions")
+	var furniture_name = furniture_options.get_item_text(furniture_options.get_selected_id())
+
+	var furniture = load("res://ECS/Entity/"+furniture_name+"/Entity.tscn").instantiate()
+	var mesh_instance = furniture.get_node("Mesh")
+	furniture.remove_child(mesh_instance)
+	#print(mesh_instance)   
+	add_child(mesh_instance)
+	
 func select_room():
 	clear()
 	for entity_id in ECS.c_get("Room"):

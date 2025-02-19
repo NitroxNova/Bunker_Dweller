@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3owqc8ukwbay"
-path.s3tc="res://.godot/imported/twin_bed_Material Base Color.png-fd070535376378073620c11baece6042.s3tc.ctex"
+path.s3tc="res://.godot/imported/twin_bed_Material Base Color.png-2df16d9d662114938dc024dbe5a327a0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://game/objects/bed/twin_bed_Material Base Color.png"
-dest_files=["res://.godot/imported/twin_bed_Material Base Color.png-fd070535376378073620c11baece6042.s3tc.ctex"]
+source_file="res://ECS/Entity/twin_bed/twin_bed_Material Base Color.png"
+dest_files=["res://.godot/imported/twin_bed_Material Base Color.png-2df16d9d662114938dc024dbe5a327a0.s3tc.ctex"]
 
 [params]
 

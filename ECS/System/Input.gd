@@ -21,7 +21,7 @@ static func new_room_cell_clicked(camera: Node, event: InputEvent, event_positio
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			var tiles : Array[Vector2i] = [Vector2i(coords.x,coords.z)]
 			var doors : Array[Vector2i] = []
-			var room = Entity_Spawner.bunker_room(tiles,coords.y,3,doors,Room_Component.TYPE_OPTIONS.airlock)
+			var room = Entity_Spawner.bunker_room(tiles,coords.y,3,doors,Game.get_node("/root/Main/GameOverlay/%RoomTypeOptions").selected)
 			Game.current_room = room
 			Game.mode = Game.MODE_OPTIONS.edit_room
 

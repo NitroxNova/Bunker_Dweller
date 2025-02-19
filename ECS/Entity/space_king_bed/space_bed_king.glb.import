@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dgu1gqdd7m1d7"
-path="res://.godot/imported/space_bed_king.glb-a953d1657d9c3497ef1be6aedf027b57.scn"
+path="res://.godot/imported/space_bed_king.glb-20a7d6514fcfbf25cc47cf081127e682.scn"
 
 [deps]
 
-source_file="res://game/objects/bed/space_bed_king.glb"
-dest_files=["res://.godot/imported/space_bed_king.glb-a953d1657d9c3497ef1be6aedf027b57.scn"]
+source_file="res://ECS/Entity/space_king_bed/space_bed_king.glb"
+dest_files=["res://.godot/imported/space_bed_king.glb-20a7d6514fcfbf25cc47cf081127e682.scn"]
 
 [params]
 

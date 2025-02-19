@@ -1,6 +1,9 @@
 extends Node3D
 class_name Interaction_Point
 
+enum TYPE {bed_left,bed_right,shower,sink,toilet,refrigerator}
+@export var type : TYPE
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

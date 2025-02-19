@@ -27,8 +27,11 @@ func _ready() -> void:
 	
 	var doors : Array[Vector2i] = []
 	doors.append(Vector2i(0,1))
-	var first_room = Entity_Spawner.bunker_room(tiles,5,3,doors,Room_Component.TYPE_OPTIONS.airlock)
-	Game.current_room = first_room				
+	var first_room = Entity_Spawner.bunker_room(tiles,5,3,doors,Room_Component.TYPE_OPTIONS.bedroom)
+	Game.current_room = first_room		
+	
+	Entity_Spawner.citizen(Vector3(0,5,0))
+			
 	Game.mode = Game.MODE_OPTIONS.live
 	
 #for later	
@@ -41,7 +44,7 @@ func build_overworld():
 				World_Builder.build_world(Vector3i(x,y,z))
 	Game.mode = Game.MODE_OPTIONS.place_ship
 	
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
@@ -51,6 +54,10 @@ func _input(event: InputEvent) -> void:
 			var grid_pos = Vector3(Game.blocks_gridmap.local_to_map(point))
 			grid_pos += Vector3(.5,.5,.5)
 			%Block_Selector.position = grid_pos
+		elif Game.mode == Game.MODE_OPTIONS.place_furniture:
+			var point = get_point_under_cursor()
+			%Room_Mode/Mesh.position = point	
+			
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 		if Game.mode == Game.MODE_OPTIONS.place_ship:
 			var point = get_point_under_cursor()
@@ -64,6 +71,11 @@ func _input(event: InputEvent) -> void:
 			var block = Game.blocks_gridmap.get_cell_item(grid_pos)
 			if block < Game.BLOCK_OPTIONS.white_floor:
 				Game.blocks_gridmap.set_cell_item(grid_pos,-1)
+		elif Game.mode == Game.MODE_OPTIONS.place_furniture:
+			var furniture_options :OptionButton = get_node("/root/Main/GameOverlay/%RoomTypeOptions")
+			var furniture_type = furniture_options.get_item_text(furniture_options.get_selected_id())
+			var furniture_xform = %Room_Mode/Mesh.transform
+			Entity_Spawner.spawn(furniture_type,furniture_xform)
 	elif Input.is_action_just_pressed("escape"):
 		Game.mode = Game.MODE_OPTIONS.pause
 

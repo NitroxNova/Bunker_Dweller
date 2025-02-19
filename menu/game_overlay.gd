@@ -1,10 +1,8 @@
 extends Control
 var current_time = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
+func _ready():
+	$%RoomModeBar.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,7 +39,7 @@ func _on_mode_button_item_selected(index: int) -> void:
 		Game.mode = Game.MODE_OPTIONS.live
 		%RoomModeBar.hide()
 	elif button_text == "Room Mode":
-		Game.mode = Game.MODE_OPTIONS.select_room
+		Game.mode = Game.MODE_OPTIONS.edit_room
 		%RoomModeBar.show()
 	elif button_text == "Block Mode":
 		Game.mode = Game.MODE_OPTIONS.destroy_blocks
@@ -57,4 +55,13 @@ func _on_room_options_button_item_selected(index: int) -> void:
 		Game.mode = Game.MODE_OPTIONS.edit_room
 	elif button_text == "Select Room":
 		Game.mode = Game.MODE_OPTIONS.select_room
+	elif button_text == "Furniture":
+		Game.mode = Game.MODE_OPTIONS.place_furniture
+		
+func _on_room_type_options_item_selected(index: int) -> void:
+	if Game.mode == Game.MODE_OPTIONS.edit_room:
+		var c_room:Room_Component = Game.current_room.c_get("Room")
+		c_room.room_type = index
+	elif Game.mode == Game.MODE_OPTIONS.place_furniture:
+		Game.room_mode.place_furniture()
 		

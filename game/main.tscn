@@ -23,6 +23,7 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_dgpao"]
+cell_height = 0.01
 agent_radius = 0.0
 agent_max_climb = 1.0
 

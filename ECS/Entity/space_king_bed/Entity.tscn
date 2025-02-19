@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://cid2nuueqoh1i"]
+[gd_scene load_steps=7 format=4 uid="uid://cid2nuueqoh1i"]
 
-[ext_resource type="Texture2D" uid="uid://4d5jy36i34vl" path="res://game/objects/bed/space_bed_king_Image_0.png" id="1_8psn0"]
+[ext_resource type="Texture2D" uid="uid://4d5jy36i34vl" path="res://ECS/Entity/space_king_bed/space_bed_king_Image_0.png" id="1_8psn0"]
+[ext_resource type="Script" uid="uid://cvwe3ewblb5k" path="res://resource/Interaction_Point.gd" id="3_kd4sk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjqip"]
 resource_name = "Material_0.004"
@@ -46,7 +47,7 @@ points = PackedVector3Array(0.732146, 0.303544, 1.41318, -1.33754, 0.440221, -1.
 
 [node name="SpaceBedKing" type="StaticBody3D"]
 
-[node name="geometry_0" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1a5sk")
 skeleton = NodePath("")
 
@@ -57,3 +58,14 @@ shape = SubResource("ConvexPolygonShape3D_y4oe7")
 height = 1.2
 vertices = PackedVector3Array(-0.764824, 0, 1.60918, 0.756261, 0, 1.52645, 1.4244, 0, 1.01771, 1.68388, 0, -1.45289, -1.74462, 0, -1.50966, -1.4788, 0, 0.987393)
 affect_navigation_mesh = true
+
+[node name="Bed_Left_Interaction_Point" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.48307, 0, 0)
+script = ExtResource("3_kd4sk")
+metadata/_custom_type_script = "uid://b5c17o3o5nmbt"
+
+[node name="Bed_Right_Interaction_Point" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01707, 0, 0)
+script = ExtResource("3_kd4sk")
+type = 1
+metadata/_custom_type_script = "uid://ewm4xqfh26tt"

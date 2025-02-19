@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4d5jy36i34vl"
-path.s3tc="res://.godot/imported/space_bed_king_Image_0.png-8f5e5743135697ede64e5f954040a48e.s3tc.ctex"
+path.s3tc="res://.godot/imported/space_bed_king_Image_0.png-6dc32370f633975ef7f44418a9265b22.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://game/objects/bed/space_bed_king_Image_0.png"
-dest_files=["res://.godot/imported/space_bed_king_Image_0.png-8f5e5743135697ede64e5f954040a48e.s3tc.ctex"]
+source_file="res://ECS/Entity/space_king_bed/space_bed_king_Image_0.png"
+dest_files=["res://.godot/imported/space_bed_king_Image_0.png-6dc32370f633975ef7f44418a9265b22.s3tc.ctex"]
 
 [params]
 

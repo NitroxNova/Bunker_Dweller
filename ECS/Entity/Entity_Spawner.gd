@@ -38,31 +38,14 @@ static func citizen(position:Vector3)->Entity:
 	entity.c_add(x_form)
 	return entity
 	
-static func bed()->Entity:
+static func spawn(entity_type:String,transform:Transform3D):
 	var entity: Entity = ECS.new_entity()
-	var bed_scene = load("res://game/objects/bed/twin_bed.tscn").instantiate()
+	var scene = load("res://ECS/Entity/"+entity_type+"/Entity.tscn").instantiate()
+	entity.c_add(Node_Component.new(scene))
 	entity.c_add(Needs_Render_Component.new())
-	entity.c_add(Node_Component.new(bed_scene))
-	return entity
-
-static func space_bed_king()->Entity:
-	var entity: Entity = ECS.new_entity()
-	var bed_scene = load("res://game/objects/bed/space_bed_king.tscn").instantiate()
-	entity.c_add(Needs_Render_Component.new())
-	entity.c_add(Node_Component.new(bed_scene))
-	#entity.c_add(Navigation_Obstacle_Component.new())
-	var left_interact = ECS.new_entity()
-	var l_xform = Transform_Component.new()
-	l_xform.set_position(Vector3(1,0,1))
-	left_interact.c_add(l_xform)
-	left_interact.c_add(Interactable_Component.new(entity.id,["sit","sleep"]))
-	
-	var c_interact = Interactions_Component.new([left_interact.id])
-	#c_interact.add_interaction(Vector3(1,0,1),Vector3.LEFT,["sit","sleep"])
-	entity.c_add(c_interact)
+	entity.c_add(Transform_Component.new(transform))
 	return entity
 	
-		
 static func stone_block()->Entity:
 	var entity: Entity = ECS.new_entity()
 	var block_scene = STONE_BLOCK.instantiate()

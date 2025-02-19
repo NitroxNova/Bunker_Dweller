@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://cbt3p18xlv0sh"]
 
 [ext_resource type="Script" uid="uid://b0u5vwg3ewq74" path="res://game/objects/starter_ship/starter_ship.gd" id="1_2fvj6"]
-[ext_resource type="Script" uid="uid://cvwe3ewblb5k" path="res://ECS/Entity/Interaction_Point.gd" id="3_jy5np"]
+[ext_resource type="Script" uid="uid://cvwe3ewblb5k" path="res://resource/Interaction_Point.gd" id="3_jy5np"]
 [ext_resource type="Texture2D" uid="uid://cwbqm3rxnmhqd" path="res://game/objects/starter_ship/start_ship_Image_0.png" id="3_n4bpg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lol84"]
